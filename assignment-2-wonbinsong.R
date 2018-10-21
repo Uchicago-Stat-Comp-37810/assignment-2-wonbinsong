@@ -85,22 +85,27 @@ acceptance = 1-mean(duplicated(chain[-(1:burnIn),]))  # compute acceptance rates
 
 ### Summary: #######################
 
-par(mfrow = c(2,3))  # create a matrix of 2x3 plots
-hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )  # create a histogram of Posterior of a
-abline(v = mean(chain[-(1:burnIn),1]))  # add a vertical line indicating mean of a
-abline(v = trueA, col="red" )  # add a vertical line indicating trueA
-hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")  # create a histogram of Posterior of b
-abline(v = mean(chain[-(1:burnIn),2]))  # add a vertical line indicating mean of b
-abline(v = trueB, col="red" )  # add a vertical line indicating trueB
-hist(chain[-(1:burnIn),3],nclass=30, main="Posterior of sd", xlab="True value = red line")  # create a histogram of Posterior of sd
-abline(v = mean(chain[-(1:burnIn),3]) )  # add a vertical line
-abline(v = trueSd, col="red" )  # add a vertical line indicating trueSd
-plot(chain[-(1:burnIn),1], type = "l", xlab="True value = red line" , main = "Chain values of a", )  # plot chain values of a 
-abline(h = trueA, col="red" )  # add a horizontal line indicating trueA
-plot(chain[-(1:burnIn),2], type = "l", xlab="True value = red line" , main = "Chain values of b", )  # plot chain values of b
-abline(h = trueB, col="red" )  # add a horizontal line indicating trueB
-plot(chain[-(1:burnIn),3], type = "l", xlab="True value = red line" , main = "Chain values of sd", )  # plot chain values of sd
-abline(h = trueSd, col="red" )  # add a horizontal line indicating trueSd
+summary.plot <- function(){
+  par(mfrow = c(2,3))  # create a matrix of 2x3 plots
+  hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )  # create a histogram of Posterior of a
+  abline(v = mean(chain[-(1:burnIn),1]))  # add a vertical line indicating mean of a
+  abline(v = trueA, col="red" )  # add a vertical line indicating trueA
+  hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")  # create a histogram of Posterior of b
+  abline(v = mean(chain[-(1:burnIn),2]))  # add a vertical line indicating mean of b
+  abline(v = trueB, col="red" )  # add a vertical line indicating trueB
+  hist(chain[-(1:burnIn),3],nclass=30, main="Posterior of sd", xlab="True value = red line")  # create a histogram of Posterior of sd
+  abline(v = mean(chain[-(1:burnIn),3]) )  # add a vertical line
+  abline(v = trueSd, col="red" )  # add a vertical line indicating trueSd
+  plot(chain[-(1:burnIn),1], type = "l", xlab="True value = red line" , main = "Chain values of a", )  # plot chain values of a 
+  abline(h = trueA, col="red" )  # add a horizontal line indicating trueA
+  plot(chain[-(1:burnIn),2], type = "l", xlab="True value = red line" , main = "Chain values of b", )  # plot chain values of b
+  abline(h = trueB, col="red" )  # add a horizontal line indicating trueB
+  plot(chain[-(1:burnIn),3], type = "l", xlab="True value = red line" , main = "Chain values of sd", )  # plot chain values of sd
+  abline(h = trueSd, col="red" )  # add a horizontal line indicating trueSd
+}
+
+summary.plot()
+
 
 # for comparison:
 summary(lm(y~x))  # summaryies of the results of model fitting
