@@ -10,6 +10,8 @@ likelihood <- function(param){  # creating a function with a parameter "para"
 }
 
 
+slopevalues <- function(x){return(likelihood(c(x, trueB, trueSd)))} # create a function
+
 prior <- function(param){  # creating a function with a parameter "param"
   a = param[1]  # "a" takes the value of 1st element in vector "para"
   b = param[2]  # "b" takes the value of 2nd element in vector "para"
@@ -45,7 +47,7 @@ run_metropolis_MCMC <- function(startvalue, iterations){  # creating a function 
 }
 
 
-summary.plot <- function(){
+summary.plot <- function(chain, burnIn,trueA,trueB,trueSd){
   par(mfrow = c(2,3))  # create a matrix of 2x3 plots
   hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )  # create a histogram of Posterior of a
   abline(v = mean(chain[-(1:burnIn),1]))  # add a vertical line indicating mean of a
